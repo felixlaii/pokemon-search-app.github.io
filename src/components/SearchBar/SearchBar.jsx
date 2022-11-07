@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { pokeAPI } from '../../utils/getPokemon';
+import PokemonData from '../PokemonData/PokemonData';
 
 export default function SearchBar() {
     const [search, setSearch] = useState('');
@@ -36,8 +37,16 @@ export default function SearchBar() {
         />
         <button className="search-bar__button" onClick={(e) => getPokemon(search)}>search</button>
       </div>
+        {pokemon.map((pokemons) => {
+            <PokemonData 
+            name={pokemons.name}
+            sprite={pokemons.sprites.front_default}
+            abilities={pokemons.abilities}
+            stats={pokemons.stats}
+            types={pokemons.types}
+            />
+        })}
 
-      
     </div>
   )
 }
