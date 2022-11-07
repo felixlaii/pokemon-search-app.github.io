@@ -4,8 +4,8 @@ import { pokeAPI } from "../../utils/getPokemon";
 import PokemonData from "../PokemonData/PokemonData";
 
 export default function SearchBar() {
-  const [search, setSearch] = useState("");
-  const [pokemon, setPokemon] = useState();
+//   const [search, setSearch] = useState("");
+  const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -14,7 +14,7 @@ export default function SearchBar() {
     if (search.length > 1) {
       setLoading(true);
       axios
-        .get(`${pokeAPI}/pokemon`)
+        .get(`${pokeAPI}/pokemon/${search}`)
         .then((response) => {
           console.log(response);
           if (response) {
@@ -33,16 +33,45 @@ export default function SearchBar() {
           className="search-bar__input"
           type="text"
           placeholder="search pokemon"
-          onChange={(e) => getPokemon(e.target.value)}
+        //   onChange={(e) => getPokemon(e.target.value)}
         />
         <button
           className="search-bar__button"
-          onClick={(e) => getPokemon(search)}
+          onClick={(e) => getPokemon(e.target.value)}
         >
           search
         </button>
       </div>
-        {/* {pokemon.map((pokemons) => {
+      {pokemon.length ? (
+        pokemon.map((pokemons) => {
+          return (
+            <div className="search-bar__results">
+              <div className="search-bar__wrapper">
+                <div className="search-bar__card">
+                  <div className="search-bar__image">
+                    <img
+                      className="search-bar__poster"
+                      src={pokemons.sprites.front_default}
+                      alt="poster"
+                    />
+                  </div>
+                  <div className="search-bar__details">
+                    <p className="search-bar__title">{pokemons.name}</p>
+                    <p className="search-bar__abilities">{pokemons.abilities}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <div className="searc-bar__loading">
+          <div className="search-bar__error">
+            <p className="search-bar__message">find your favourite movie!</p>
+          </div>
+        </div>
+      )}
+      {/* {pokemon.map((pokemons) => {
             <PokemonData
             key={pokemons.id}
             name={pokemons.name}
