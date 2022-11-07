@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { pokeAPI } from '../../utils/getPokemon';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 export default function HomePage() {
     const [pokemon, setPokemon] = useState();
@@ -17,7 +18,7 @@ export default function HomePage() {
         axios.get(`${pokeAPI}/pokemon`)
         .then((response) => { console.log(response)
             if(response) {
-                setPokemon(response);
+                setPokemon(response.data.results);
                 setLoading(false);
             }
         })
@@ -27,7 +28,7 @@ export default function HomePage() {
 
   return (
     <div>
-        
+        <SearchBar getPokemon={getPokemon} />
     </div>
   )
 }
