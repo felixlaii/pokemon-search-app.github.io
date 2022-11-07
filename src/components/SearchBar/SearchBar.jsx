@@ -4,19 +4,19 @@ import { pokeAPI } from "../../utils/getPokemon";
 import PokemonData from "../PokemonData/PokemonData";
 
 export default function SearchBar() {
-//   const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const getPokemon = async (search) => {
-    if (search.length > 1) {
+    if (!search) {
       setLoading(true);
       axios
         .get(`${pokeAPI}/pokemon/${search}`)
         .then((response) => {
-          console.log(response);
+        //   console.log(response.data.results);
           if (response) {
             setPokemon(response.data.results);
             setLoading(false);
@@ -33,16 +33,16 @@ export default function SearchBar() {
           className="search-bar__input"
           type="text"
           placeholder="search pokemon"
-        //   onChange={(e) => getPokemon(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <button
           className="search-bar__button"
-          onClick={(e) => getPokemon(e.target.value)}
+          onClick={(e) => getPokemon(search)}
         >
           search
         </button>
       </div>
-      {pokemon.length ? (
+      {/* {pokemon.length ? (
         pokemon.map((pokemons) => {
           return (
             <div className="search-bar__results">
@@ -70,17 +70,17 @@ export default function SearchBar() {
             <p className="search-bar__message">find your favourite movie!</p>
           </div>
         </div>
-      )}
-      {/* {pokemon.map((pokemons) => {
+      )} */}
+      {pokemon.map((pokemons) => {
             <PokemonData
             key={pokemons.id}
             name={pokemons.name}
-            sprite={pokemons.sprites.front_default}
+            // sprite={pokemons.sprites.front_default}
             abilities={pokemons.abilities}
             stats={pokemons.stats}
             types={pokemons.types} />
 
-        })} */}
+        })}
     </div>
   );
 }
