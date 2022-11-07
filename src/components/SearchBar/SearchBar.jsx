@@ -42,7 +42,7 @@ export default function SearchBar() {
           search
         </button>
       </div>
-        {pokemon.map((pokemons) => {
+        {/* {pokemon.map((pokemons) => {
             <PokemonData
             key={pokemons.id}
             name={pokemons.name}
@@ -51,7 +51,7 @@ export default function SearchBar() {
             stats={pokemons.stats}
             types={pokemons.types} />
 
-        })}
+        })} */}
     </div>
   );
 }
