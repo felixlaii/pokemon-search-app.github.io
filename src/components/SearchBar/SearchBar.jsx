@@ -42,19 +42,16 @@ export default function SearchBar() {
           search
         </button>
       </div>
-        {pokemon.length ? (
-            pokemon.map((val, key) => {
-                return (
-                    <div className="search-bar__results" key={key}>
-                        <div className="search-bar__wrapper">
-                            <div className="search-bar__card">
-                                
-                            </div>
-                        </div>
-                    </div>
-                )
-            })
-        )}
+        {pokemon.map((pokemons) => {
+            <PokemonData
+            key={pokemons.id}
+            name={pokemons.name}
+            sprite={pokemons.sprites.front_default}
+            abilities={pokemons.abilities}
+            stats={pokemons.stats}
+            types={pokemons.types} />
+
+        })}
     </div>
   );
 }
