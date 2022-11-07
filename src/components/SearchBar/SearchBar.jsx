@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { pokeAPI } from "../../utils/getPokemon";
+import { fetchPokemon } from "../../utils/getPokemon";
 import PokemonData from "../PokemonData/PokemonData";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+//   const [error, setError] = useState(false);
+//   const [errorMsg, setErrorMsg] = useState("");
 
   const getPokemon = async (search) => {
     if (!search) {
       setLoading(true);
       axios
-        .get(`${pokeAPI}/pokemon/${search}`)
+        .get(fetchPokemon(search))
         .then((response) => {
-        //   console.log(response.data.results);
+          console.log(response.data.results);
           if (response) {
             setPokemon(response.data.results);
             setLoading(false);
@@ -33,15 +33,22 @@ export default function SearchBar() {
           className="search-bar__input"
           type="text"
           placeholder="search pokemon"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => getPokemon(search)}
         />
-        <button
-          className="search-bar__button"
-          onClick={(e) => getPokemon(search)}
-        >
-          search
-        </button>
       </div>
+      {loading ? (
+        <div className="search-bar__loading">
+            <p> loading ...</p>
+            </div>
+      ) : null}
+      {!loading && pokemon ? (
+        <PokemonData
+          name={pokemon.name}
+        //   sprite={pokemon.sprites.front_default}
+          abilities={pokemon.abilities}
+          stats={pokemon.stats}
+          types={pokemon.types} />
+      ): null}
       {/* {pokemon.length ? (
         pokemon.map((pokemons) => {
           return (
@@ -71,7 +78,7 @@ export default function SearchBar() {
           </div>
         </div>
       )} */}
-      {pokemon.map((pokemons) => {
+      {/* {pokemon.map((pokemons) => {
             <PokemonData
             key={pokemons.id}
             name={pokemons.name}
@@ -80,7 +87,7 @@ export default function SearchBar() {
             stats={pokemons.stats}
             types={pokemons.types} />
 
-        })}
+        })} */}
     </div>
   );
 }

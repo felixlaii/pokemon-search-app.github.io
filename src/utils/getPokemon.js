@@ -1,3 +1,9 @@
-const pokeAPI = `https://pokeapi.co/api/v2`
+const pokeAPI = `https://pokeapi.co/api/v2`;
+const query = {
+  pokemon: "pokemon",
+};
 
-export { pokeAPI };
+export async function fetchPokemon(pokemon) {
+  console.log(`${pokeAPI}/${query.pokemon}/${pokemon}`);
+  return fetch(`${pokeAPI}/${query.pokemon}/${pokemon}`);
+}
