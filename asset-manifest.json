@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/pokemonsearch.github.io/static/css/main.ec48db49.css",
+    "main.js": "/pokemonsearch.github.io/static/js/main.1093e3db.js",
+    "static/media/pokemon.svg": "/pokemonsearch.github.io/static/media/pokemon.17b2d8c1482f004467895f547c5a57f7.svg",
+    "index.html": "/pokemonsearch.github.io/index.html",
+    "main.ec48db49.css.map": "/pokemonsearch.github.io/static/css/main.ec48db49.css.map",
+    "main.1093e3db.js.map": "/pokemonsearch.github.io/static/js/main.1093e3db.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec48db49.css",
+    "static/js/main.1093e3db.js"
+  ]
+}
